@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { browserHistory } from 'react-router';
-import { Players } from '../api/players';
+import { Posts } from '../api/posts';
 
 export default class Example extends Component {
-  submitPlayer(event) {
+  submitPost(event) {
     event.preventDefault();
 
-    let player = {
+    let post = {
       name: this.refs.name.value,
       team: this.refs.team.value,
       ballManipulation: this.refs.ballManipulation.value,
@@ -22,11 +22,11 @@ export default class Example extends Component {
       owner: Meteor.userId(),
     }
 
-    Meteor.call('insertPlayer', player, (error) =>{
+    Meteor.call('insertPost', post, (error) =>{
       if(error) {
-        alert("Oups something went wrong: " + error.reason);
+        alert("Post failed: " + error.reason);
       } else {
-        alert("Player added");
+        alert("Post added");
         browserHistory.push('/');
       }
     });
@@ -35,8 +35,8 @@ export default class Example extends Component {
   render() {
     return (
       <div className="row">
-        <form className="col s12" onSubmit={this.submitPlayer.bind(this)}>
-          <h3>Add a new player</h3>
+        <form className="col s12" onSubmit={this.submitPost.bind(this)}>
+          <h3>Add a new Post</h3>
 
           <div className="row">
             <div className="input-field col s6">

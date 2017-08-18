@@ -8,24 +8,24 @@ import { createContainer } from 'meteor/react-meteor-data';
 import { Link } from 'react-router';
 
 // database - collection
-import { Players } from '../api/players';
+import { Posts } from '../api/posts';
 
 import TeamList from './Team-list';
 import TeamStats from './Team-stats';
-import Player from './Player';
-import AccountsWrapper from './AccountsWrapper';
+import Post from './Post';
+
 
 export default class App extends Component {
   constructor(props) {
     super(props);
 
     // setting up the state
-    this.state = { players: [] };
+    this.state = { posts: [] };
   }
 
-  renderPlayers() {
-    return this.props.players.map((player) => (
-      <TeamList key={player._id} player={player} />
+  renderPosts() {
+    return this.props.posts.map((post) => (
+      <TeamList key={post._id} post={post} />
     ));
   }
 
@@ -34,18 +34,17 @@ export default class App extends Component {
       <MuiThemeProvider>
         <div className="container">
           <AppBar
-            title="Soccer Application"
+            title="POSTS"
             iconClassNameRight="muidocs-icon-navigation-expand-more"
             showMenuIconButton={false}>
-              <AccountsWrapper />
             </AppBar>
           <div className="row">
-            <div className="col s12 m7" ><Player /></div>
+            <div className="col s12 m7" ><Post /></div>
             <div className="col s12 m5" >
-              <h2>Team list</h2><Link to="/new" className="waves-effect waves-light btn">Add player</Link>
+              <h2>Team list</h2><Link to="/new" className="waves-effect waves-light btn">Add Post</Link>
               <Divider/>
                 <List>
-                  {this.renderPlayers()}
+                  {this.renderPosts()}
                 </List>
               <Divider/>
             </div>
@@ -58,14 +57,14 @@ export default class App extends Component {
 }
 
 App.propTypes = {
-  players: PropTypes.array.isRequired,
+  posts: PropTypes.array.isRequired,
 };
 
 export default createContainer(() => {
-  Meteor.subscribe('players');
+  Meteor.subscribe('posts');
   const user = Meteor.userId();
 
   return {
-    players: Players.find({ owner: user }, {sort: { name: 1}}).fetch(),
+    posts: Posts.find({ owner: post }, {sort: { name: 1}}).fetch(),
   };
 }, App);

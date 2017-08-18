@@ -18,14 +18,14 @@ const styles = {
   },
 };
 
-export default class Player extends Component {
+export default class Post extends Component {
   render() {
     return (
       <Card>
         <CardMedia
           overlay={<CardTitle title="Emmanuel Henri" subtitle="Offense: 12 - Defense: 8" />}
         >
-          <img src="player.jpg" />
+        
         </CardMedia>
         <CardText>
           <div style={styles.wrapper}>

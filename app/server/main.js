@@ -1,8 +1,8 @@
 import { Meteor } from 'meteor/meteor';
-import { Players } from '../imports/api/players';
+import { Posts } from '../imports/api/posts';
 
 Meteor.startup(() => {
-  Meteor.publish('players', function() {
-    return Players.find({});
+  Meteor.publish('posts', function() {
+    return Posts.find({});
   })
 });
