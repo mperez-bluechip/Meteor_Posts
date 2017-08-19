@@ -16,7 +16,8 @@ Posts.deny({
 
 const PostSchema = new SimpleSchema({
   title: { type: String },
-  content: { type: String },
+  content: { type: String }
+
 });
 
 Posts.attachSchema(PostSchema);

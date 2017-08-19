@@ -15,7 +15,7 @@ Meteor.startup(() => {
     <Router history={browserHistory}>
       <Route path="/" component={App}/>
       <Route path="/new" component={New}/>
-      <Route path="*" component={Lost}/>
+      <Route path="*" component={NotFound}/>
     </Router>
   ), document.getElementById('render-target'));
 });

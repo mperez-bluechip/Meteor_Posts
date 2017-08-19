@@ -10,8 +10,7 @@ import { Link } from 'react-router';
 // database - collection
 import { Posts } from '../api/posts';
 
-import TeamList from './Team-list';
-import TeamStats from './Team-stats';
+import PostList from './Post-list';
 import Post from './Post';
 
 
@@ -25,7 +24,7 @@ export default class App extends Component {
 
   renderPosts() {
     return this.props.posts.map((post) => (
-      <TeamList key={post._id} post={post} />
+      <PostList key={post._id} post={post} />
     ));
   }
 
@@ -34,21 +33,20 @@ export default class App extends Component {
       <MuiThemeProvider>
         <div className="container">
           <AppBar
-            title="POSTS"
+            title="Post"
             iconClassNameRight="muidocs-icon-navigation-expand-more"
             showMenuIconButton={false}>
             </AppBar>
           <div className="row">
             <div className="col s12 m7" ><Post /></div>
             <div className="col s12 m5" >
-              <h2>Team list</h2><Link to="/new" className="waves-effect waves-light btn">Add Post</Link>
+              <h2>Post list</h2><Link to="/new" className="waves-effect waves-light btn">Add post</Link>
               <Divider/>
                 <List>
                   {this.renderPosts()}
                 </List>
               <Divider/>
             </div>
-            <div className="col s12 m5" ><TeamStats/></div>
           </div>
         </div>
       </MuiThemeProvider>
@@ -65,6 +63,6 @@ export default createContainer(() => {
   const user = Meteor.userId();
 
   return {
-    posts: Posts.find({ owner: post }, {sort: { name: 1}}).fetch(),
+    posts: Posts.find({ owner: user }, {sort: { title: 1}}).fetch(),
   };
 }, App);
